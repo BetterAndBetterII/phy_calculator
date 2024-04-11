@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "name": "windows-clang-x64",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "D:\\Program Files (x86)\\mingw-w64-v11.0.0\\mingw64\\bin"
+      ],
+      "compilerPath": "D:\\Program Files (x86)\\mingw-w64-v11.0.0\\mingw64\\bin",
+      "cStandard": "${default}",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "windows-clang-x64",
+      "compilerArgs": [
+        ""
+      ]
+    }
+  ],
+  "version": 4
+}
