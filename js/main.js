@@ -1,4 +1,3 @@
-
 var matrix1 = null;
 var matrix2 = null;
 
