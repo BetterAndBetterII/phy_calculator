@@ -113,6 +113,16 @@ function calculateStatistics(number_list) {
     list.setCorrectionFactor(t_set);
     list.calculateVariance();
     list.calculateRelativeUncertainty();
+
+    const average = list.AV.toFixed(6);
+    const variance = (list.FC / 1e6).toFixed(6);
+    const row_bq = (list.row_BQ / 1e3).toFixed(6);
+    const bq = (list.BQ / 1e3).toFixed(6);
+    const ex = (list.Ex / 1e3).toFixed(6);
+    const t_m = list.t_m.toFixed(6);
+
     list.printStatistics();
     list.freeList();
+
+    return [average, variance, row_bq, bq, ex, t_m];
 }
