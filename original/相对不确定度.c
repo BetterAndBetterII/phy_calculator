@@ -32,6 +32,9 @@ int main() {
 	printf("请输入悬臂梁厚度的不确定度\n");
 	scanf("%lf", &c_O_b);
 	
+	printf("请输入单个砝码质量b\n");
+	scanf("%lf", & c_m );
+	
 	printf("请输入角度\n");
 	scanf("%lf", &c_a_2a);
 	printf("请输入角度的相对不确定度* 10000\n");
