@@ -1,4 +1,5 @@
 function calculateYang(y_l, y_a_, y_b, y_d, y_a_a) {
+    console.log(`y_l: ${y_l}, y_a_: ${y_a_}, y_b: ${y_b}, y_d: ${y_d}, y_a_a: ${y_a_a}`)
     const y_m = 9.3;
     const y_g = 9.7915;
 

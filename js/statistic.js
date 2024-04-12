@@ -5,7 +5,7 @@ class Node {
     }
 }
 
-class LinkedList {
+class LinkedList1 {
     constructor() {
         this.pHead = null;
         this.pTail = null;
@@ -82,7 +82,7 @@ class LinkedList {
 }
 
 function main() {
-    const list = new LinkedList();
+    const list = new LinkedList1();
     const t_set = [0,0,1.84,1.32,1.20,1.14,1.11,1.09,1.08,1.07,1.06,0,1.05,0,0,1.04,0,0,0,0,1.03,1];
     
     console.log("请输入数据，输入零表示退出");
@@ -103,7 +103,7 @@ function main() {
 
 
 function calculateStatistics(number_list) {
-    const list = new LinkedList();
+    const list = new LinkedList1();
     const t_set = [0,0,1.84,1.32,1.20,1.14,1.11,1.09,1.08,1.07,1.06,0,1.05,0,0,1.04,0,0,0,0,1.03,1];
     for(const number of number_list) {
         list.addNode(number);

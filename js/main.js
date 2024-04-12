@@ -42,7 +42,7 @@ function yang_init() {
     for(const node of document.getElementsByClassName("data-input-box")){
         node.style.display = 'none';
     }
-    const tags = ["yang-a-input", "yang-l-input", "yang-b-input", "yang-d-input"]
+    const tags = ["yang-a-input", "yang-l-input", "yang-b-input", "yang-d-input", "yang-a_a-input"];
     for (const tag of tags){
         document.getElementById(tag).parentNode.style.display = 'block';
     }
@@ -106,11 +106,11 @@ document.querySelectorAll('.nav-link').forEach(item => {
             function_name = 'yang';
             yang_init();
         }
-        else if (this.id == 'option2') {
+        else if (this.id == 'option3') {
             function_name = 'tan';
             tan_init();
         }
-        else if (this.id == 'option3') {
+        else if (this.id == 'option2') {
             function_name = 'uncertainty';
             uncertainty_init();
         }
@@ -121,27 +121,18 @@ document.querySelectorAll('.nav-link').forEach(item => {
     });
 });
 
-document.querySelector('#matrix1').addEventListener('input', function () {
-    // 矩阵1输入框内容发生变化
-    inputarea1Focusing = true;
-    inputarea2Focusing = false;
-    if (this.value) {
-        saveOri(this.value);
-    }
-});
-
 document.querySelector('#fractional').addEventListener('click', function () {
     console.log('fractional');
     // 切换到分数显示
     number_type = 'fractional';
-    calculateMatrix();
+    calculate();
 });
 
 document.querySelector('#decimal').addEventListener('click', function () {
     console.log('decimal');
     // 切换到小数显示
     number_type = 'decimal';
-    calculateMatrix();
+    calculate();
 });
 
 function copyToClipboard(text) {
@@ -205,49 +196,35 @@ function renderResult(latexStr, simpleStr, fullExprStr) {
 
 function renderYang() {
     const a = document.getElementById("yang-a-input").value
+    const l = document.getElementById("yang-l-input").value
+    const b = document.getElementById("yang-b-input").value
+    const d = document.getElementById("yang-d-input").value
+    const a_a = document.getElementById("yang-a_a-input").value
     
     var latexString = '';
-    if (!matrix1 || !matrix2) {
-        if (!matrix1 && matrix2) {
-            console.log('矩阵1为空');
-            latexString = `$$\\text{矩阵1为空} \\times ${matrix2.getLatexString(number_type)}$$`;
-        }
-        else if (matrix1 && !matrix2) {
-            console.log('矩阵2为空');
-            latexString = `$$${matrix1.getLatexString(number_type)} \\times \\text{矩阵2为空}$$`;
-        }
-        else if (!matrix1 && !matrix2) {
-            console.log('矩阵1和矩阵2为空');
-            latexString = `$$\\text{矩阵1为空} \\times \\text{矩阵2为空}$$`;
-        }
-        else {
-            console.log('矩阵1和矩阵2为空');
-            latexString = `$$\\text{矩阵1为空} \\times \\text{矩阵2为空}$$`;
-        }
+    if (!a || !b || !l || !d) {
+        latexString = `$$\\text{请填写完整数据}$$`;
         renderResult('', '', latexString);
     }
     else {
         try {
-            result_matrix = matrix1.multiply(matrix2);
-            console.log('result_matrix:', result_matrix);
-            // 构建矩阵乘法的完整LaTeX表示
-            latexString = `$$ ${matrix1.getLatexString(number_type)} \\times ${matrix2.getLatexString(number_type)} = ${result_matrix.getLatexString(number_type)} $$`;
-            renderResult(result_matrix.getLatexString(number_type), result_matrix.getSimpleString(), latexString);
+            result = calculateYang(l, a, b, d, a_a);
+            console.log('Yang result: ', result);
+            // 完整LaTeX表示
+            latexString = `$$ Yang:\ ${result} $$`;
+            renderResult('', '', latexString);
         }
         catch (e) {
-            console.log('矩阵乘法失败:', e);
-            latexString = `$$${matrix1.getLatexString(number_type)} \\times ${matrix2.getLatexString(number_type)} = \\text{矩阵乘法失败${e}}$$`;
+            console.log('杨氏模量计算失败:', e);
+            latexString = `$$ Yang:\ Error!$$`;
             renderResult('', '', latexString);
         }
     }
 }
 
-function calculateMatrix() {
+function calculate() {
     if (function_name == 'yang') {
-        if (!matrix1 || !matrix2) {
-            console.log('矩阵1或矩阵2为空');
-        }
-        renderMatrixMultiplication(matrix1, matrix2);
+        renderYang();
     }
     else if (function_name == 'tan') {
         if (!matrix1) {
@@ -305,15 +282,38 @@ function toggleOptionsVisibility() {
     }
 }
 
-// Event listener to trigger when the result content changes
-const observer = new MutationObserver(toggleOptionsVisibility);
-
-// Configuration of the observer:
-const config = { childList: true, subtree: true, characterData: true };
-
-// Start observing the target node for configured mutations
-observer.observe(resultContainer, config);
 
 
-// 在页面加载完毕后调用此函数以设置事件监听器
-document.addEventListener('DOMContentLoaded', autoHeight);
+window.onload = function() {
+    // Get all input elements inside the form
+    const inputs = document.querySelectorAll('form input[type="text"]');
+    
+    // Attach change event listeners to each input element
+    inputs.forEach(input => {
+        input.addEventListener('input', calculate);
+    });
+
+    // Optionally, attach listeners to 'radio' buttons or 'checkboxes' if they also trigger calculations
+    const radios = document.querySelectorAll('form input[type="radio"]');
+    radios.forEach(radio => {
+        radio.addEventListener('change', calculate);
+    });
+
+    const checkboxes = document.querySelectorAll('form input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', calculate);
+    });
+
+    // Event listener to trigger when the result content changes
+    const observer = new MutationObserver(toggleOptionsVisibility);
+
+    // Configuration of the observer:
+    const config = { childList: true, subtree: true, characterData: true };
+
+    // Start observing the target node for configured mutations
+    observer.observe(resultContainer, config);
+
+
+    // 在页面加载完毕后调用此函数以设置事件监听器
+    document.addEventListener('DOMContentLoaded', autoHeight);
+};
