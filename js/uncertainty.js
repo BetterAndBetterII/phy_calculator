@@ -16,7 +16,10 @@ function main() {
     console.log("输入的数据请输入毫米或者克,输入角度时请各放大10000倍后输入");
     c_b = parseFloat(prompt("请输入截面宽度b (mm): "));
     c_d = parseFloat(prompt("请输入悬臂梁厚度d (mm): "));
-    c_a_2a = parseFloat(prompt("请输入角度 (放大10000倍后): "));
+    // 
+     c_O_b = parseFloat(prompt("请输入悬臂梁厚度的不确定度"));
+
+    c_a_2a = parseFloat(prompt("请输入角度: "));
     let c_O_a_2a_input = parseFloat(prompt("请输入角度的相对不确定度* 10000: "));
     c_l = parseFloat(prompt("请输入悬臂长度l (mm): "));
 
