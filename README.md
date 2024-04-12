@@ -1,6 +1,6 @@
 # 🔧 俊波物理计算器
 
-![alt text](image.png)
+![alt text](phy_show.png)
 
 ## 🚀 介绍
 
