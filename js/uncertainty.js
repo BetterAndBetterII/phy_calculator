@@ -54,11 +54,20 @@ function calculateUncertainty(c_b, c_d, c_a_2a, c_O_a_2a_input, c_l) {
     let c_l = 210.5;  // beam length in meters
     const c_a = 12.32;  // mass width in meters
 
-    let c_B = math.pow((c_O_b * 10000) / c_b, 2);
-    let c_D = math.pow((c_O_d * 10000) / c_d, 2) * 9;
-    let c_L = math.pow((c_O_l * 10000) / (c_l - c_a), 2) * 4;
-    let c_A_2A = math.pow(c_O_a_2a_input / c_a_2a, 2);
-    let c_M = math.pow((c_O_m * 10000) / c_m, 2);
+    //let c_B = math.pow((c_O_b * 10000) / c_b, 2);
+    //let c_D = math.pow((c_O_d * 10000) / c_d, 2) * 9;
+    //let c_L = math.pow((c_O_l * 10000) / (c_l - c_a), 2) * 4;
+    //let c_A_2A = math.pow(c_O_a_2a_input / c_a_2a, 2);
+    //let c_M = math.pow((c_O_m * 10000) / c_m, 2);
+    c_O_b=c_O_b * 10000;
+    let c_B = (c_O_b  / c_b)*(c_O_b  / c_b);
+    c_O_d=c_O_d * 10000;
+    let c_D = (c_O_d / c_d)*(c_O_d / c_d) * 9;
+     c_O_l=c_O_l * 10000;
+    let c_L = (c_O_l / (c_l - c_a))*(c_O_l / (c_l - c_a)) * 4;
+    let c_A_2A =(c_O_a_2a_input / c_a_2a)*(c_O_a_2a_input / c_a_2a);
+    c_O_m=c_O_m * 10000;
+    let c_M = (c_O_m / c_m)*(c_O_m / c_m);
 
     const c_sum = math.sum(c_B, c_D, c_L, c_A_2A, c_M).toFixed(6);
 
