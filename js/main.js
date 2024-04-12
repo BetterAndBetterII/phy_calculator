@@ -70,7 +70,7 @@ function uncertainty_init() {
     for(const node of document.getElementsByClassName("data-input-box")){
         node.style.display = 'none';
     }
-    const tags = ["uncertainty-c_b-input", "uncertainty_c_d-input", "uncertainty-c_a_2a-input", "uncertainty-c_O_a_2a_input-input", "uncertainty-c_l-input"];
+    const tags = ["uncertainty-c_b-input", "uncertainty-c_d-input", "uncertainty-c_a_2a-input", "uncertainty-c_O_a_2a_input-input", "uncertainty-c_l-input"];
     for (const tag of tags){
         document.getElementById(tag).parentNode.style.display = 'block';
     }
