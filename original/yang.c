@@ -16,26 +16,28 @@ int main() {
 	double y_d=0;
 	double y_E=0;
 	
-	printf("ÇëÊäÈël\n");
+	printf("Ã‡Ã«ÃŠÃ¤ÃˆÃ«l\n");
 	scanf("%lf", &y_l);
-	printf("ÇëÊäÈëa/2 \n");
+	printf("Ã‡Ã«ÃŠÃ¤ÃˆÃ«a/2 \n");
 	scanf("%lf", &y_a_);
-	printf("ÇëÊäÈëb\n");
+	printf("Ã‡Ã«ÃŠÃ¤ÃˆÃ«b\n");
 	scanf("%lf", &y_b);
-	printf("ÇëÊäÈëd\n");
+	printf("Ã‡Ã«ÃŠÃ¤ÃˆÃ«d\n");
 	scanf("%lf", &y_d);
-
+	//è¾“å…¥å•ä¸ªç ç è´¨é‡
+	 printf("Ã‡Ã«ÃŠÃ¤ÃˆÃ«d\n");
+	scanf("%lf", & y_m);
 
 
 	double y_ii = y_l - y_a_;
 	y_ii = y_ii*y_ii;
-	double y_fenzi = 12 * y_m * y_g * y_ii * 1000;
+	double y_fenzi = 12 * y_m *5* y_g * y_ii * 1000;    //äº”ä¸ªç ç 
 	y_d = y_d * y_d * y_d;
 	double y_fenmu=y_b*y_d;
 
 	/*while (1) {*/
 		double y_a_a=0;
-		printf("ÇëÊäÈëa_a\n");
+		printf("Ã‡Ã«ÃŠÃ¤ÃˆÃ«a_a\n");
 		scanf("%lf", &y_a_a);
 		//
 		y_E = y_fenzi / (y_fenmu*y_a_a);
