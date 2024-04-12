@@ -63,7 +63,7 @@ function calculateUncertainty(c_b, c_d, c_a_2a, c_O_a_2a_input, c_l) {
     let c_B = (c_O_b  / c_b)*(c_O_b  / c_b);
     c_O_d=c_O_d * 10000;
     let c_D = (c_O_d / c_d)*(c_O_d / c_d) * 9;
-     c_O_l=c_O_l * 10000;
+    c_O_l=c_O_l * 10000;
     let c_L = (c_O_l / (c_l - c_a))*(c_O_l / (c_l - c_a)) * 4;
     let c_A_2A =(c_O_a_2a_input / c_a_2a)*(c_O_a_2a_input / c_a_2a);
     c_O_m=c_O_m * 10000;

@@ -211,7 +211,11 @@ function renderYang() {
             result = calculateYang(l, a, b, d, a_a);
             console.log('Yang result: ', result);
             // 完整LaTeX表示
-            latexString = `$$ Yang:\ ${result} $$`;
+            if (number_type == 'fractional') {
+                latexString = `$$ E = \ ${result} $$`;
+            } else {
+                latexString = `$$ E = \ ${result} $$`;
+            }
             renderResult('', '', latexString);
         }
         catch (e) {

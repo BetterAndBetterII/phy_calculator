@@ -27,8 +27,10 @@ class LinkedList {
   }
 
   calculateAngle(f_tana, f_tanx) {
-    const fenzi = (f_tana * 10000) - (f_tanx * 10000);
-    const fenmu = 1 + (f_tana * f_tanx);
+    f_tana = math.bignumber(f_tana);
+    f_tanx = math.bignumber(f_tanx);
+    const fenzi = math.subtract(math.multiply(f_tana, 10000), math.multiply(f_tanx, 10000));
+    const fenmu = math.add(1, math.multiply(f_tana, f_tanx));
     return math.divide(fenzi, fenmu);
   }
 
