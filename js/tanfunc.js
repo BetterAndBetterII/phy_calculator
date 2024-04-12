@@ -1,14 +1,3 @@
-// Import the math.js library
-const { create, all } = require('mathjs');
-const math = create(all);
-
-class Node {
-  constructor(value = null, tail = null) {
-    this.value = value;
-    this.tail = tail;
-  }
-}
-
 class LinkedList {
   constructor() {
     this.pHead = null;
@@ -95,7 +84,6 @@ function calculateTan(input_list, f_tana) {
   const list = new LinkedList();
   let index = 1;
   let first = true;
-  let f_tana;
 
   for (const input of input_list) {
     const [num1, num2] = input.split(',').map(Number);

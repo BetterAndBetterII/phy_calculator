@@ -84,7 +84,7 @@ function statistic_init() {
     for(const node of document.getElementsByClassName("data-input-box")){
         node.style.display = 'none';
     }
-    const tags = ["tan-input-input", "tan-f_tana-input"];
+    const tags = ["statistic-number_list-input"];
     for (const tag of tags){
         document.getElementById(tag).parentNode.style.display = 'block';
     }
@@ -222,27 +222,95 @@ function renderYang() {
     }
 }
 
+function renderTan() {
+    const input = document.getElementById("tan-input-input").value
+    const f_tana = document.getElementById("tan-f_tana-input").value
+    
+    var latexString = '';
+    if (!input || !f_tana) {
+        latexString = `$$\\text{请填写完整数据}$$`;
+        renderResult('', '', latexString);
+    }
+    else {
+        try {
+            result = calculateTan(input, f_tana);
+            console.log('Tan result: ', result);
+            // 完整LaTeX表示
+            latexString = `$$ Tan:\ ${result} $$`;
+            renderResult('', '', latexString);
+        }
+        catch (e) {
+            console.log('正切值计算失败:', e);
+            latexString = `$$ Tan:\ Error!$$`;
+            renderResult('', '', latexString);
+        }
+    }
+}
+
+function renderUncertainty() {
+    const c_b = document.getElementById("uncertainty-c_b-input").value
+    const c_d = document.getElementById("uncertainty-c_d-input").value
+    const c_a_2a = document.getElementById("uncertainty-c_a_2a-input").value
+    const c_O_a_2a_input = document.getElementById("uncertainty-c_O_a_2a_input-input").value
+    const c_l = document.getElementById("uncertainty-c_l-input").value
+    
+    var latexString = '';
+    if (!c_b || !c_d || !c_a_2a || !c_O_a_2a_input || !c_l) {
+        latexString = `$$\\text{请填写完整数据}$$`;
+        renderResult('', '', latexString);
+    }
+    else {
+        try {
+            result = calculateUncertainty(c_b, c_d, c_a_2a, c_O_a_2a_input, c_l);
+            console.log('Uncertainty result: ', result);
+            // 完整LaTeX表示
+            latexString = `$$ Uncertainty:\ ${result} $$`;
+            renderResult('', '', latexString);
+        }
+        catch (e) {
+            console.log('相对不确定度计算失败:', e);
+            latexString = `$$ Uncertainty:\ Error!$$`;
+            renderResult('', '', latexString);
+        }
+    }
+}
+
+function renderStatistic() {
+    const number_list = document.getElementById("statistic-number_list-input").value
+    
+    var latexString = '';
+    if (!number_list) {
+        latexString = `$$\\text{请填写完整数据}$$`;
+        renderResult('', '', latexString);
+    }
+    else {
+        try {
+            result = calculateStatistics(number_list);
+            console.log('Statistic result: ', result);
+            // 完整LaTeX表示
+            latexString = `$$ Statistic:\ ${result} $$`;
+            renderResult('', '', latexString);
+        }
+        catch (e) {
+            console.log('统计计算失败:', e);
+            latexString = `$$ Statistic:\ Error!$$`;
+            renderResult('', '', latexString);
+        }
+    }
+}
+
 function calculate() {
     if (function_name == 'yang') {
         renderYang();
     }
     else if (function_name == 'tan') {
-        if (!matrix1) {
-            console.log('矩阵1为空');
-        }
-        renderMatrixInverse(matrix1);
+        renderTan();
     }
     else if (function_name == 'uncertainty') {
-        if (!matrix1 || !matrix2) {
-            console.log('矩阵1或矩阵2为空');
-        }
-        renderMatrixAdd(matrix1, matrix2);
+        renderUncertainty();
     }
     else if (function_name == 'statistic') {
-        if (!matrix1 || !matrix2) {
-            console.log('矩阵1或矩阵2为空');
-        }
-        renderMatrixMinus(matrix1, matrix2);
+        renderStatistic();
     }
 }
 
