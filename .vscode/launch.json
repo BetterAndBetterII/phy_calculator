@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Coding/HTML/cjb",
-      "program": "d:/Coding/HTML/cjb/build/Debug/outDebug",
+      "cwd": "d:/Coding/HTML/cjb/original",
+      "program": "d:/Coding/HTML/cjb/original/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
