@@ -4,6 +4,7 @@ function calculateYang(y_l, y_a_, y_b, y_d, y_a_a,y_n) {
     const y_g = math.bignumber(9.7915);
     y_l = math.bignumber(y_l);
     y_a_ = math.bignumber(y_a_);
+    // y_a_ = math.multiply(y_a_, 0.5);
     y_b = math.bignumber(y_b);
     y_d = math.bignumber(y_d);
     
@@ -22,5 +23,5 @@ function calculateYang(y_l, y_a_, y_b, y_d, y_a_a,y_n) {
     const y_fenmu = math.chain(y_b).multiply(y_d_cubed).done();
     console.log(`y_fenmu: ${y_fenmu}`)
     const res = math.chain(y_fenzi).divide(math.multiply(y_fenmu, y_a_a)).done();
-    return (y_fenzi / (y_fenmu * y_a_a)).toFixed(6);
+    return res.toFixed(6);
 }

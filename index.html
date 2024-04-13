@@ -98,17 +98,7 @@
                         </div>
                     </form>
                     <!-- <button onclick="calculateMatrix()" class="btn btn-primary">计算</button> -->
-                    <div class="mt-3">计算结果：</div>
-                    <!-- 开关(boostrap)切换小数/分数显示 -->
-                    <div class="mb-3">
-                        <div class="btn-group" role="group" aria-label="number type">
-                            <input type="radio" class="btn-check" name="number_type" id="fractional" autocomplete="off" checked>
-                            <label class="btn btn-outline-primary" for="fractional">分数</label>
-                
-                            <input type="radio" class="btn-check" name="number_type" id="decimal" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="decimal">小数</label>
-                        </div>
-                    </div>
+                    <div class="mt-3" id="result-lable" style="display: none;">计算结果：</div>
                     <div id="result" class="mt-3"></div>
                     <div class="options mt-3" id="copy-options" style="display: none;">
                         <span>复制结果：</span>

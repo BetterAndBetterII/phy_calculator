@@ -6,7 +6,7 @@ var resultsStorage = {
 
 var function_name = 'yang';
 
-var number_type = 'fractional';
+var number_type = 'decimal';
 
 async function show_warning(message, duration) {
     const warning = document.getElementById('warning');
@@ -119,20 +119,6 @@ document.querySelectorAll('.nav-link').forEach(item => {
             statistic_init();
         }
     });
-});
-
-document.querySelector('#fractional').addEventListener('click', function () {
-    console.log('fractional');
-    // 切换到分数显示
-    number_type = 'fractional';
-    calculate();
-});
-
-document.querySelector('#decimal').addEventListener('click', function () {
-    console.log('decimal');
-    // 切换到小数显示
-    number_type = 'decimal';
-    calculate();
 });
 
 function copyToClipboard(text) {
@@ -340,20 +326,22 @@ function autoHeight() {
     document.getElementById('matrix2').addEventListener('input', func);
 }
 
-
-// Listen for changes in the 'result' div content
 const resultContainer = document.getElementById('result');
 const optionsContainer = document.getElementById('copy-options');
+const label = document.getElementById('result-lable');
 
 // Function to check result content and toggle visibility
 function toggleOptionsVisibility() {
+    // Listen for changes in the 'result' div content
+
     if (resultContainer.textContent.trim() !== '') {
         optionsContainer.style.display = 'block';
+        label.style.display = 'block';
     } else {
         optionsContainer.style.display = 'none';
+        label.style.display = 'none';
     }
 }
-
 
 
 window.onload = function() {
@@ -384,7 +372,6 @@ window.onload = function() {
 
     // Start observing the target node for configured mutations
     observer.observe(resultContainer, config);
-
 
     // 在页面加载完毕后调用此函数以设置事件监听器
     document.addEventListener('DOMContentLoaded', autoHeight);
