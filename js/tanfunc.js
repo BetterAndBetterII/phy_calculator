@@ -19,11 +19,14 @@ class LinkedList {
 
   calculateAngles(f_tana) {
     let currentNode = this.pHead;
+    const res = []
     while (currentNode) {
       const angle = this.calculateAngle(f_tana, currentNode.value);
       console.log(`${angle} (/10000)`);
+      res.push(angle);
       currentNode = currentNode.tail;
     }
+    return res;
   }
 
   calculateAngle(f_tana, f_tanx) {
@@ -82,13 +85,14 @@ async function main() {
   list.clear();
 }
 
-function calculateTan(input_list, f_tana) {
+function calculateTan(points) {
   const list = new LinkedList();
   let index = 1;
   let first = true;
 
-  for (const input of input_list) {
-    const [num1, num2] = input.split(',').map(Number);
+  for (const input of points) {
+    const num1 = math.bignumber(input["x"]);
+    const num2 = math.bignumber(input["y"]);
     
     if (num1 === 0) break;
 
@@ -100,7 +104,7 @@ function calculateTan(input_list, f_tana) {
     list.addNode(res);
   }
 
-  var result = list.calculateAngles(f_tana);
+  const result = list.calculateAngles(f_tana);
   console.log(`角度计算结果：${result}`);
   list.clear();
   return result;

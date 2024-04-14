@@ -56,7 +56,7 @@ function tan_init() {
     for(const node of document.getElementsByClassName("data-input-box")){
         node.style.display = 'none';
     }
-    const tags = ["tan-input-input", "tan-f_tana-input"];
+    const tags = ["tan-input-input"];
     for (const tag of tags){
         document.getElementById(tag).parentNode.style.display = 'block';
     }
@@ -213,25 +213,33 @@ function renderYang() {
 }
 
 function renderTan() {
-    const input = document.getElementById("tan-input-input").value
-    const f_tana = document.getElementById("tan-f_tana-input").value
+    const points = [];
+    const rows = document.querySelectorAll('#tan-input-input tbody tr');
+    rows.forEach(row => {
+        const x = row.cells[1].querySelector('input').value; // 获取X坐标
+        const y = row.cells[2].querySelector('input').value; // 获取Y坐标
+        points.push({x: x, y: y});
+    });
+    console.log('Tan points:', points);
     
     var latexString = '';
-    if (!input || !f_tana) {
+    if (!points || points.length == 0) {
         latexString = `$$\\text{请填写完整数据}$$`;
         renderResult('', '', latexString);
     }
     else {
         try {
-            result = calculateTan(input, f_tana);
+            result = calculateTan(points);
             console.log('Tan result: ', result);
             // 完整LaTeX表示
-            latexString = `$$ Tan:\ ${result} $$`;
+            for (let i = 0; i < result.length; i++) {
+                latexString += `$$ Tan_${i+1}:\ ${result[i].toFixed(6)} \\times 10^{-4}$$`;
+            }
             renderResult('', '', latexString);
         }
         catch (e) {
             console.log('正切值计算失败:', e);
-            latexString = `$$ Tan:\ Error!$$`;
+            latexString = `$$\ Error!请确保坐标正确!$$`;
             renderResult('', '', latexString);
         }
     }
@@ -350,6 +358,14 @@ window.onload = function() {
     
     // Attach change event listeners to each input element
     inputs.forEach(input => {
+        input.addEventListener('input', calculate);
+    });
+
+    const tan_input = document.getElementById('tan-input-input');
+
+    const coordinate_inputs = tan_input.querySelectorAll('input[type="text"]');
+
+    coordinate_inputs.forEach(input => {
         input.addEventListener('input', calculate);
     });
 
