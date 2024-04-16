@@ -146,7 +146,56 @@ const calculations = {
         "outputs": {
             "result": "$$ a - b = \ {result} $$",
         }
-    }
+    },
+        "Thermal_conductivity": {
+        "name":"计算非良导体的热导率",
+        "description":"请按照说明在下方输入数据",
+        "inputs":{
+            "B_l" :{
+                "name":"B的厚度(cm)",
+                "details":"输入B的厚度(cm)",
+                "type":"number",
+            },
+            "A_d":{
+                "name":"A的高度(cm)",
+                "details":"输入A的厚度(cm)",
+                "type":"number",
+            },
+            "A_D":{
+                "name":"A的直径(cm)",
+                "details":"输入A的直径(cm)",
+                "type":"number",
+            },
+            "A_m":{
+                "name":"A的质量(g)",
+                "details":"输入A的质量(cm)",
+                "type":"number",
+            },
+            "k":{
+                "name":"斜率(K/s)",
+                "details":"输入斜率(K/s)",
+                "type":"number",
+            },
+            "T1":{
+                "name":"T1",
+                "details":"稳恒温度T1",
+                "type":"number",
+            },
+            "T2":{
+                "name":"T2",
+                "details":"稳恒温度T2",
+                "type":"number",
+            },
+        },
+        "calculation": {
+            "function": "Thermal_conductivity",
+            "arguments": ["B_l","A_d","A_D","A_m","k","T1","T2"]
+        },
+        "outputs": {
+            "result": "$$ λ = {lamu} $$",
+        }
+
+    },
 }
 
 
