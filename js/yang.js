@@ -23,5 +23,7 @@ function calculateYang(y_l, y_a_, y_b, y_d, y_a_a,y_n) {
     const y_fenmu = math.chain(y_b).multiply(y_d_cubed).done();
     console.log(`y_fenmu: ${y_fenmu}`)
     const res = math.chain(y_fenzi).divide(math.multiply(y_fenmu, y_a_a)).done();
-    return res.toFixed(6);
+    return {
+        "result": res.toFixed(6),
+    }
 }

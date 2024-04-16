@@ -4,8 +4,6 @@ var resultsStorage = {
     fullExpression: ''
 };
 
-var function_name = 'yang';
-
 var number_type = 'decimal';
 
 async function show_warning(message, duration) {
@@ -32,94 +30,6 @@ function hide_warning() {
     // warning.style.display = 'hide';
     warning.style.visibility = 'hidden';
 }
-
-
-
-function yang_init() {
-    // 初始化杨氏模量计算功能
-    document.getElementById('function-title').innerText = '计算平均杨氏模量';
-    document.getElementById('function-detail').innerText = '请按照说明在下方输入数据。';
-    for(const node of document.getElementsByClassName("data-input-box")){
-        node.style.display = 'none';
-    }
-    const tags = ["yang-a-input", "yang-l-input", "yang-b-input", "yang-d-input", "yang-a_a-input"];
-    for (const tag of tags){
-        document.getElementById(tag).parentNode.style.display = 'block';
-    }
-    calculate();
-}
-
-function tan_init() {
-    // 初始化计算正切值功能
-    document.getElementById('function-title').innerText = '计算正切值';
-    document.getElementById('function-detail').innerText = '请按照说明在下方输入数据。';
-    for(const node of document.getElementsByClassName("data-input-box")){
-        node.style.display = 'none';
-    }
-    const tags = ["tan-input-input"];
-    for (const tag of tags){
-        document.getElementById(tag).parentNode.style.display = 'block';
-    }
-    calculate();
-}
-
-function uncertainty_init() {
-    // 初始化计算相对不确定度功能
-    document.getElementById('function-title').innerText = '计算相对不确定度';
-    document.getElementById('function-detail').innerText = '请按照说明在下方输入数据。';
-    for(const node of document.getElementsByClassName("data-input-box")){
-        node.style.display = 'none';
-    }
-    const tags = ["uncertainty-c_b-input", "uncertainty-c_d-input", "uncertainty-c_a_2a-input", "uncertainty-c_O_a_2a_input-input", "uncertainty-c_l-input"];
-    for (const tag of tags){
-        document.getElementById(tag).parentNode.style.display = 'block';
-    }
-    calculate();
-}
-
-function statistic_init() {
-    // 初始化计算正切值功能
-    document.getElementById('function-title').innerText = '计算统计';
-    document.getElementById('function-detail').innerText = '请按照说明在下方输入数据。';
-    for(const node of document.getElementsByClassName("data-input-box")){
-        node.style.display = 'none';
-    }
-    const tags = ["statistic-number_list-input"];
-    for (const tag of tags){
-        document.getElementById(tag).parentNode.style.display = 'block';
-    }
-    calculate();
-}
-
-
-document.querySelectorAll('.nav-link').forEach(item => {
-    item.addEventListener('click', function (e) {
-        e.preventDefault();
-        this.classList.add('active');
-        document.querySelectorAll('.nav-link').forEach(link => {
-            if (link !== this) {
-                link.classList.remove('active');
-            }
-        });
-
-        if (this.id == 'option1') {
-            function_name = 'yang';
-            yang_init();
-        }
-        else if (this.id == 'option3') {
-            function_name = 'tan';
-            tan_init();
-        }
-        else if (this.id == 'option2') {
-            function_name = 'uncertainty';
-            uncertainty_init();
-        }
-        else if (this.id == 'option4') {
-            function_name = 'statistic';
-            statistic_init();
-        }
-    });
-});
 
 function copyToClipboard(text) {
     console.log('复制内容:', text);
@@ -180,160 +90,6 @@ function renderResult(latexStr, simpleStr, fullExprStr) {
     });
 }
 
-function renderYang() {
-    const a = document.getElementById("yang-a-input").value
-    const l = document.getElementById("yang-l-input").value
-    const b = document.getElementById("yang-b-input").value
-    const d = document.getElementById("yang-d-input").value
-    const a_a = document.getElementById("yang-a_a-input").value
-    
-    var latexString = '';
-    if (!a || !b || !l || !d) {
-        latexString = `$$\\text{请填写完整数据}$$`;
-        renderResult('', '', latexString);
-    }
-    else {
-        try {
-            result = calculateYang(l, a, b, d, a_a);
-            console.log('Yang result: ', result);
-            // 完整LaTeX表示
-            if (number_type == 'fractional') {
-                latexString = `$$ E = \ ${result} $$`;
-            } else {
-                latexString = `$$ E = \ ${result} $$`;
-            }
-            renderResult('', '', latexString);
-        }
-        catch (e) {
-            console.log('杨氏模量计算失败:', e);
-            latexString = `$$ Yang:\ Error!$$`;
-            renderResult('', '', latexString);
-        }
-    }
-}
-
-function renderTan() {
-    const points = [];
-    const rows = document.querySelectorAll('#tan-input-input tbody tr');
-    rows.forEach(row => {
-        const x = row.cells[1].querySelector('input').value; // 获取X坐标
-        const y = row.cells[2].querySelector('input').value; // 获取Y坐标
-        points.push({x: x, y: y});
-    });
-    console.log('Tan points:', points);
-    
-    var latexString = '';
-    if (!points || points.length == 0) {
-        latexString = `$$\\text{请填写完整数据}$$`;
-        renderResult('', '', latexString);
-    }
-    else {
-        try {
-            result = calculateTan(points);
-            console.log('Tan result: ', result);
-            // 完整LaTeX表示
-            for (let i = 0; i < result.length; i++) {
-                latexString += `$$ Tan_${i+1}:\ ${result[i].toFixed(6)} \\times 10^{-4}$$`;
-            }
-            renderResult('', '', latexString);
-        }
-        catch (e) {
-            console.log('正切值计算失败:', e);
-            latexString = `$$\ Error!请确保坐标正确!$$`;
-            renderResult('', '', latexString);
-        }
-    }
-}
-
-function renderUncertainty() {
-    const c_b = document.getElementById("uncertainty-c_b-input").value
-    const c_d = document.getElementById("uncertainty-c_d-input").value
-    const c_a_2a = document.getElementById("uncertainty-c_a_2a-input").value
-    const c_O_a_2a_input = document.getElementById("uncertainty-c_O_a_2a_input-input").value
-    const c_l = document.getElementById("uncertainty-c_l-input").value
-    
-    var latexString = '';
-    if (!c_b || !c_d || !c_a_2a || !c_O_a_2a_input || !c_l) {
-        latexString = `$$\\text{请填写完整数据}$$`;
-        renderResult('', '', latexString);
-    }
-    else {
-        try {
-            result = calculateUncertainty(c_b, c_d, c_a_2a, c_O_a_2a_input, c_l);
-            console.log('Uncertainty result: ', result);
-            // 完整LaTeX表示
-            latexString = `$$ Uncertainty:\ ${result} $$`;
-            renderResult('', '', latexString);
-        }
-        catch (e) {
-            console.log('相对不确定度计算失败:', e);
-            latexString = `$$ Uncertainty:\ Error!$$`;
-            renderResult('', '', latexString);
-        }
-    }
-}
-
-function renderStatistic() {
-    const number_list = document.getElementById("statistic-number_list-input").value
-    
-    var latexString = '';
-    if (!number_list) {
-        latexString = `$$\\text{请填写完整数据}$$`;
-        renderResult('', '', latexString);
-    }
-    else {
-        try {
-            result = calculateStatistics(number_list);
-            console.log('Statistic result: ', result);
-            // 完整LaTeX表示
-            latexString = `$$ Statistic:\ ${result} $$`;
-            renderResult('', '', latexString);
-        }
-        catch (e) {
-            console.log('统计计算失败:', e);
-            latexString = `$$ Statistic:\ Error!$$`;
-            renderResult('', '', latexString);
-        }
-    }
-}
-
-function calculate() {
-    if (function_name == 'yang') {
-        renderYang();
-    }
-    else if (function_name == 'tan') {
-        renderTan();
-    }
-    else if (function_name == 'uncertainty') {
-        renderUncertainty();
-    }
-    else if (function_name == 'statistic') {
-        renderStatistic();
-    }
-}
-
-
-function autoHeight() {
-    const func = function (e) {
-        // Set the height of the textarea to the height of its content
-        if (this.value.indexOf("\n") != -1) {
-            var lines = this.value.split("\n")
-            var linesCount = lines.length
-        }
-        else {
-            var linesCount = 1
-        }
-        if (linesCount > 2) {
-            this.style.height = (linesCount * 1.5) + "em"
-        }
-        else {
-            this.style.height = "3em"
-        }
-    }
-    document.getElementById('matrix1').addEventListener('input', func);
-    document.getElementById('matrix2').addEventListener('input', func);
-}
-
 const resultContainer = document.getElementById('result');
 const optionsContainer = document.getElementById('copy-options');
 const label = document.getElementById('result-lable');
@@ -353,33 +109,6 @@ function toggleOptionsVisibility() {
 
 
 window.onload = function() {
-    // Get all input elements inside the form
-    const inputs = document.querySelectorAll('form input[type="text"]');
-    
-    // Attach change event listeners to each input element
-    inputs.forEach(input => {
-        input.addEventListener('input', calculate);
-    });
-
-    const tan_input = document.getElementById('tan-input-input');
-
-    const coordinate_inputs = tan_input.querySelectorAll('input[type="text"]');
-
-    coordinate_inputs.forEach(input => {
-        input.addEventListener('input', calculate);
-    });
-
-    // Optionally, attach listeners to 'radio' buttons or 'checkboxes' if they also trigger calculations
-    const radios = document.querySelectorAll('form input[type="radio"]');
-    radios.forEach(radio => {
-        radio.addEventListener('change', calculate);
-    });
-
-    const checkboxes = document.querySelectorAll('form input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', calculate);
-    });
-
     // Event listener to trigger when the result content changes
     const observer = new MutationObserver(toggleOptionsVisibility);
 
@@ -388,7 +117,4 @@ window.onload = function() {
 
     // Start observing the target node for configured mutations
     observer.observe(resultContainer, config);
-
-    // 在页面加载完毕后调用此函数以设置事件监听器
-    document.addEventListener('DOMContentLoaded', autoHeight);
 };

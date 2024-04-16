@@ -40,18 +40,18 @@ function main() {
     console.log("结果为未开根号且放大了100000000的值");
 }
 
-function calculateUncertainty(c_b, c_d, c_a_2a, c_O_a_2a_input, c_l) {
+function calculateUncertainty(c_b, c_d, c_a_2a, c_O_a_2a_input, c_l, c_m) {
     const c_g = 9.7915;  // gravitational constant in m/s^2
     const c_O_m = 0.05773;  // original mass in kilograms
-    const c_m = 9.3;  // mass in kilograms
+    // const c_m = 9.3;  // mass in kilograms
     const c_O_b = 0.011547;  // original beam width in meters
-    let c_b = 24.68;  // beam width in meters
+    // let c_b = 24.68;  // beam width in meters
     const c_O_d = 0.00284809;  // original beam thickness in meters
-    let c_d = 0.9128;  // beam thickness in meters
-    let c_a_2a = 0.01268;  // angle in radians
+    // let c_d = 0.9128;  // beam thickness in meters
+    // let c_a_2a = 0.01268;  // angle in radians
     const c_O_a_2a = 0;  // original angle uncertainty (will be input)
     const c_O_l = 0.28867;  // original beam length in meters
-    let c_l = 210.5;  // beam length in meters
+    // let c_l = 210.5;  // beam length in meters
     const c_a = 12.32;  // mass width in meters
 
     //let c_B = math.pow((c_O_b * 10000) / c_b, 2);
@@ -73,5 +73,7 @@ function calculateUncertainty(c_b, c_d, c_a_2a, c_O_a_2a_input, c_l) {
 
     console.log(`The sum is ${c_sum} (/100000000)`);
 
-    return c_sum;
+    return {
+        "result": c_sum,
+    }
 }

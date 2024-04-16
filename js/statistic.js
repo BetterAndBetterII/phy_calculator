@@ -124,5 +124,12 @@ function calculateStatistics(number_list) {
     list.printStatistics();
     list.freeList();
 
-    return [average, variance, row_bq, bq, ex, t_m];
+    return {
+        "average": average,
+        "variance": variance,
+        "row_bq": row_bq,
+        "bq": bq,
+        "ex": ex,
+        "t_m": t_m
+    };
 }
