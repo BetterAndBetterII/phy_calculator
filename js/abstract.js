@@ -127,7 +127,7 @@ const calculations = {
 }
 
 
-var function_name = 'yang';
+var function_name = Object.keys(calculations)[0];
 
 function _renderResult(result) {
     if (result === "$$请填写所有数据。$$") {
