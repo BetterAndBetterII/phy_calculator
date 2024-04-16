@@ -123,6 +123,29 @@ const calculations = {
         "outputs": {
             "result": "$$ 平均数是 {average} $$ $$ 方差是 {variance} $$ $$ 未乘以系数的绝对不确定度是 {row_bq} $$ $$ 绝对不确定度是 {bq} $$ $$ 相对不确定度是 {ex} $$ $$ 根据数据个数， t(m)是 {t_m} $$",
         }
+    },
+    "a_minus_b": {
+        "name": "计算两数之差",
+        "description": "请按照说明在下方输入数据。",
+        "inputs": {
+            "a": {
+                "name": "数a",
+                "details": "输入数a...",
+                "type": "number"
+            },
+            "b": {
+                "name": "数b",
+                "details": "输入数b...",
+                "type": "number"
+            }
+        },
+        "calculation": {
+            "function": "a_minus_b",
+            "arguments": ["a", "b"]
+        },
+        "outputs": {
+            "result": "$$ a - b = \ {result} $$",
+        }
     }
 }
 
