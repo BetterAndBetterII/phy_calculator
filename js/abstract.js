@@ -111,7 +111,7 @@ const calculations = {
         "description": "请按照说明在下方输入数据。",
         "inputs": {
             "number_list": {
-                "name": "数据",
+                "name": "数据序列",
                 "details": "输入数据：1, 2, 3...",
                 "type": "text"
             }
