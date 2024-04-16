@@ -188,11 +188,11 @@ const calculations = {
             },
         },
         "calculation": {
-            "function": "Thermal_conductivity",
+            "function": "REDAO",
             "arguments": ["B_l","A_d","A_D","A_m","k","T1","T2"]
         },
         "outputs": {
-            "result": "$$ λ = {lamu} $$",
+            "result": "$$ λ = {result} $$",
         }
 
     },
@@ -208,6 +208,7 @@ function _renderResult(result) {
     }
     console.log(result instanceof Array);
     if (result instanceof Array) {
+        console.log(result);
         var latexString = "";
         for (const key in result) {
             latexString += calculations[function_name].outputs.result.replace("{index}", key).replace("{result}", result[key]);
@@ -219,6 +220,15 @@ function _renderResult(result) {
         for (const key in result) {
             latexString = latexString.replace(`{${key}}`, result[key]);
         }
+        renderResult('', '', latexString);
+    } else if (result instanceof Number || result instanceof String) {
+        console.log(result);
+        var latexString = calculations[function_name].outputs.result.replace("{result}", result);
+        renderResult('', '', latexString);
+    } else {
+        console.log(result);
+        console.error("Invalid result type.");
+        var latexString = calculations[function_name].outputs.result.replace("{result}", result);
         renderResult('', '', latexString);
     }
 }
