@@ -24,7 +24,7 @@ const calculations = {
                 "type": "number"
             },
             "y_a_a": {
-                "name": "角度$2 \theta $(°)",
+                "name": "角度$2 \\theta $(°)",
                 "details": "输入角度...",
                 "type": "number"
             },
@@ -46,6 +46,11 @@ const calculations = {
         "name": "计算杨氏模量的相对不确定度",
         "description": "请按照说明在下方输入数据。",
         "inputs": {
+            "c_l": {
+                "name": "悬臂长度$l$(mm)",
+                "details": "输入悬臂长度...",
+                "type": "number"
+            },
             "c_b": {
                 "name": "截面宽度$b$(mm)",
                 "details": "输入截面宽度...",
@@ -61,19 +66,14 @@ const calculations = {
                 "details": "输入角度...",
                 "type": "number"
             },
-            "c_O_a_2a_input": {
-                "name": "角度的相对不确定度$(\\times 10000)$",
-                "details": "输入角度的相对不确定度...",
-                "type": "number"
-            },
-            "c_l": {
-                "name": "悬臂长度$l$(mm)",
-                "details": "输入悬臂长度...",
-                "type": "number"
-            },
             "c_n": {
                 "name": "砝码个数",
                 "details": "输入砝码个数...",
+                "type": "number"
+            },
+            "c_O_a_2a_input": {
+                "name": "角度的相对不确定度$(\\times 10000)$",
+                "details": "输入角度的相对不确定度...",
                 "type": "number"
             }
         },
@@ -112,16 +112,12 @@ const calculations = {
         "inputs": {
             "number_list": {
                 "name": "数据",
-                "details": "输入数据...",
-                "x": "数据点横坐标",
-                "y": "数据点纵坐标",
-                "x_detail": "输入数据点横坐标...",
-                "y_detail": "输入数据点纵坐标...",
-                "type": "coordinates"
+                "details": "输入数据：1, 2, 3...",
+                "type": "text"
             }
         },
         "calculation": {
-            "function": "calculateStatistic",
+            "function": "calculateStatistics",
             "arguments": ["number_list"]
         },
         "outputs": {
@@ -146,8 +142,10 @@ function _renderResult(result) {
         }
         renderResult('', '', latexString);
     } else if (result instanceof Object) {
+        console.log(result);
+        var latexString = calculations[function_name].outputs.result;
         for (const key in result) {
-            var latexString = calculations[function_name].outputs.result.replace(`{${key}}`, result[key]);
+            latexString = latexString.replace(`{${key}}`, result[key]);
         }
         renderResult('', '', latexString);
     }
@@ -177,6 +175,14 @@ function calculate() {
                     valid = false;
                 }
             }
+        } else if (calculations[function_name].inputs[key].type === "text") {
+            const input = document.getElementById(`${function_name}-${key}-input`);
+            if (input) {
+                inputs[key] = input.value.split(',').map(Number);
+                if (input.value === "") {
+                    valid = false;
+                }
+            }
         }
     }
     if (valid === true) {
@@ -189,6 +195,13 @@ function calculate() {
 }
 
 function init_calculation(cal_key) {
+    const cur = document.getElementById(cal_key);
+    cur.classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(link => {
+        if (link !== cur) {
+            link.classList.remove('active');
+        }
+    });
     function_name = cal_key;
     document.getElementById('function-title').innerText = calculations[cal_key].name;
     document.getElementById('function-detail').innerText = calculations[cal_key].description;
@@ -254,13 +267,6 @@ window.onload = function () {
         a_tag.innerText = calculations[key].name;
         a_tag.onclick = function (e) {
             e.preventDefault();
-            this.classList.add('active');
-            document.querySelectorAll('.nav-link').forEach(link => {
-                if (link !== this) {
-                    link.classList.remove('active');
-                }
-            });
-    
             init_calculation(this.id);
         };
         side_bar.appendChild(a_tag);
@@ -306,6 +312,12 @@ window.onload = function () {
                 form.appendChild(div);
                 add_event_listener_to_add_point(`${cal_key}-${key}-input`, div.querySelector('.add-point'), input.x_detail, input.y_detail);
                 add_event_listener_to_remove_button(`${cal_key}-${key}-input`, div.querySelector('.remove-point'));
+            } else if (input.type === "text") {
+                div.innerHTML = `
+                    <label for="${cal_key}-${key}-input" class="form-label">${input.name}: </label>
+                    <input type="text" class="form-control" id="${cal_key}-${key}-input" placeholder="${input.details}">
+                `;
+                form.appendChild(div);
             }
         }
     }
