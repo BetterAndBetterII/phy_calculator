@@ -24,6 +24,7 @@ function REDAO(B_l, A_d, A_D, A_m, k, T1, T2) {
     let fenzi = 2 * c * (A_D + (4 * A_d)) * k * A_m*B_l;
     let fenmu = PI * A_D * A_D * (A_D + (2 * A_d)) * (T1 - T2);
     let lamu = (fenzi / fenmu) / 10;
+    lamu =math.bignumber(lamu);
     return {
         "result": lamu
     };
