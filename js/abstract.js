@@ -66,11 +66,11 @@ const calculations = {
                 "details": "输入角度...",
                 "type": "number"
             },
-            "c_n": {
-                "name": "砝码个数",
-                "details": "输入砝码个数...",
-                "type": "number"
-            },
+            //"c_n": {
+            //    "name": "砝码个数",
+            //    "details": "输入砝码个数...",
+            //    "type": "number"
+            //},
             "c_O_a_2a_input": {
                 "name": "角度的相对不确定度",
                 "details": "输入角度的相对不确定度...",
