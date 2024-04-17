@@ -24,7 +24,7 @@ const calculations = {
                 "type": "number"
             },
             "y_a_a": {
-                "name": "角度$2 \\theta $(°)",
+                "name": "角度$2 \\theta $(rad)",
                 "details": "输入角度...",
                 "type": "number"
             },
