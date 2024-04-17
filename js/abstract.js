@@ -30,7 +30,7 @@ const calculations = {
             },
             "y_n": {
                 "name": "砝码个数",
-                "details": "输入砝码个数...",
+                "details": "输入砝码个数...(有机材料为5，其他均为1)",
                 "type": "number"
             }
         },
