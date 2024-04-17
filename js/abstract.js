@@ -72,14 +72,19 @@ const calculations = {
                 "type": "number"
             },
             "c_O_a_2a_input": {
-                "name": "角度的相对不确定度$(\\times 10000)$",
+                "name": "角度的相对不确定度",
                 "details": "输入角度的相对不确定度...",
+                "type": "number"
+            },
+            "c_m": {
+                "name": "单个砝码质量",
+                "details": "输入单个砝码质量...",
                 "type": "number"
             }
         },
         "calculation": {
             "function": "calculateUncertainty",
-            "arguments": ["c_b", "c_d", "c_a_2a", "c_O_a_2a_input", "c_l", "c_n"]
+            "arguments": ["c_l","c_b", "c_d", "c_a_2a", "c_O_a_2a_input", "c_m"]
         },
         "outputs": {
             "result": "$$ U = \ {result} $$",
