@@ -163,7 +163,7 @@ const calculations = {
             },
             "A_d":{
                 "name":"A的高度(cm)",
-                "details":"输入A的厚度(cm)",
+                "details":"输入A的高度(cm)",
                 "type":"number",
             },
             "A_D":{
