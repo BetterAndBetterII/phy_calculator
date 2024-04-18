@@ -1,6 +1,6 @@
 # 🔧 下柿物理实验计算器
 
-![alt text](phy_show.png)
+![alt text](hello_world.png)
 
 ## 🚀 介绍
 
