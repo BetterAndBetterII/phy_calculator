@@ -113,7 +113,7 @@ const calculations = {
             "arguments": ["points"]
         },
         "outputs": {
-            "result": "$$ 2nθ_{index} = \ {angle} \\times 10^{-4}, tan_{index} = {result}$$",
+            "result": "$$ tan_{index} =  {angle} , 2nθ_{index} = \{result}\\times 10^{-4}$$",
         }
     },
     "statistic": {
