@@ -30,7 +30,7 @@ const calculations = {
             },
             "y_n": {
                 "name": "砝码个数",
-                "details": "输入砝码个数...",
+                "details": "输入砝码个数...(有机材料为5，其他均为1)",
                 "type": "number"
             }
         },
@@ -66,11 +66,11 @@ const calculations = {
                 "details": "输入角度...",
                 "type": "number"
             },
-            "c_n": {
-                "name": "砝码个数",
-                "details": "输入砝码个数...",
-                "type": "number"
-            },
+            //"c_n": {
+            //    "name": "砝码个数",
+            //    "details": "输入砝码个数...",
+            //    "type": "number"
+            //},
             "c_O_a_2a_input": {
                 "name": "角度的相对不确定度",
                 "details": "输入角度的相对不确定度...",
@@ -79,6 +79,11 @@ const calculations = {
             "c_m": {
                 "name": "单个砝码质量",
                 "details": "输入单个砝码质量...",
+                "type": "number"
+            },
+            "c_a": {
+                "name": "砝码宽度",
+                "details": "输入砝码宽度...",
                 "type": "number"
             }
         },
@@ -96,10 +101,10 @@ const calculations = {
         "inputs": {
             "points": {
                 "name": "坐标",
-                "x": "水平标尺读数 $x_n$",
-                "y": "竖直标尺读数 $h_n$",
-                "x_detail": "输入水平标尺读数...",
-                "y_detail": "输入竖直标尺读数...",
+                "x": "竖直标尺读数 $h_n$",
+                "y": "水平标尺读数 $x_n$",
+                "x_detail": "输入竖直标尺读数...",
+                "y_detail": "输入水平标尺读数...",
                 "type": "coordinates"
             }
         },
@@ -108,7 +113,7 @@ const calculations = {
             "arguments": ["points"]
         },
         "outputs": {
-            "result": "$$ tan_{index} = \ {result} \\times 10^{-4} $$",
+            "result": "$$ 2nθ{index} = \ {result} \\times 10^{-4} $$",
         }
     },
     "statistic": {
@@ -163,7 +168,7 @@ const calculations = {
             },
             "A_d":{
                 "name":"A的高度(cm)",
-                "details":"输入A的厚度(cm)",
+                "details":"输入A的高度(cm)",
                 "type":"number",
             },
             "A_D":{
