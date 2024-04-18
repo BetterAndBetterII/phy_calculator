@@ -62,7 +62,7 @@ const calculations = {
                 "type": "number"
             },
             "c_a_2a": {
-                "name": "角度$a$(°)",
+                "name": "角度$a$(rad)",
                 "details": "输入角度...",
                 "type": "number"
             },
