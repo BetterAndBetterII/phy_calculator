@@ -80,6 +80,11 @@ const calculations = {
                 "name": "单个砝码质量",
                 "details": "输入单个砝码质量...",
                 "type": "number"
+            },
+            "c_a": {
+                "name": "砝码宽度",
+                "details": "输入砝码宽度...",
+                "type": "number"
             }
         },
         "calculation": {
