@@ -101,10 +101,10 @@ const calculations = {
         "inputs": {
             "points": {
                 "name": "坐标",
-                "x": "水平标尺读数 $x_n$",
-                "y": "竖直标尺读数 $h_n$",
-                "x_detail": "输入水平标尺读数...",
-                "y_detail": "输入竖直标尺读数...",
+                "x": "竖直标尺读数 $h_n$",
+                "y": "水平标尺读数 $x_n$",
+                "x_detail": "输入竖直标尺读数...",
+                "y_detail": "输入水平标尺读数...",
                 "type": "coordinates"
             }
         },
@@ -113,7 +113,7 @@ const calculations = {
             "arguments": ["points"]
         },
         "outputs": {
-            "result": "$$ tan_{index} = \ {result} \\times 10^{-4} $$",
+            "result": "$$ 2nθ{index} = \ {result} \\times 10^{-4} $$",
         }
     },
     "statistic": {
