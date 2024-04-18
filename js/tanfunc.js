@@ -23,7 +23,10 @@ class LinkedList {
     while (currentNode) {
       const angle = this.calculateAngle(f_tana, currentNode.value);
       console.log(`${angle} (/10000)`);
-      res.push(angle.toFixed(6));
+      res.push({
+        "angle": currentNode.value.toFixed(6),
+        "result": angle.toFixed(6),
+      });
       currentNode = currentNode.tail;
     }
     return res;

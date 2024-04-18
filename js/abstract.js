@@ -113,7 +113,7 @@ const calculations = {
             "arguments": ["points"]
         },
         "outputs": {
-            "result": "$$ 2nθ{index} = \ {result} \\times 10^{-4} $$",
+            "result": "$$ 2nθ_{index} = \ {angle} \\times 10^{-4}, tan_{index} = {result}$$",
         }
     },
     "statistic": {
@@ -221,7 +221,11 @@ function _renderResult(result) {
         console.log(result);
         var latexString = "";
         for (const key in result) {
-            latexString += calculations[function_name].outputs.result.replace("{index}", key).replace("{result}", result[key]);
+            let str = calculations[function_name].outputs.result.replaceAll("{index}", key)
+            for (const key2 in result[key]) {
+                str = str.replace(`{${key2}}`, result[key][key2]);
+            }
+            latexString += str;
         }
         renderResult('', '', latexString);
     } else if (result instanceof Object) {
