@@ -168,4 +168,7 @@ svg:not(:root) {
 .btn-group span{
     margin: 0 20px 0 20px;
 }
+body {
+    overflow: auto;
+  }
 
