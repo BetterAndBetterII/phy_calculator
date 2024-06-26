@@ -26,7 +26,9 @@ int main() {
 
 	double T_ab = 0;//圆盘a和b的扭摆周期（s）
 	double J_ab = 0;//圆盘a和b的平均转动惯量
-
+	
+	J_a=rotational_inertia_calculate(m_a,R,r,T_a,L);
+	J_ab=rotational_inertia_calculate(m_a+m_b,R,r,T_ab,L);
 
 
 
@@ -36,6 +38,13 @@ double rotational_inertia_calculate(double R_I_m, double R_I_R, double R_I_r, do
 
 	double g = 0;//重力加速度
 	double res = 0;
+	//数据单位处理
+	//g->kg
+	R_I_m=R_I_m*0.001;
+	//cm->m
+	R_I_r=R_I_r*0.01;
+	R_I_R=R_I_R*0.01;
+	
 	R_I_T = R_I_T * R_I_T;
 	double fenzi = R_I_m * g * R_I_R * R_I_r * R_I_T;
 	double fenmu = 4 * PI * PI * R_I_L;
