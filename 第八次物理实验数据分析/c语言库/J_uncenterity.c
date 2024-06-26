@@ -1,84 +1,100 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 #include <math.h>
+double calculate_unC(double T,double T_O,double m,double m_O,double L,double L_O,double R,double R_O,double r,double r_O);
+double calculate_unC_ab(double T,double T_O,double m_a,double m_a_O,double m_b,double m_b_O,double L,double L_O,double R,double R_O,double r,double r_O);
 int main() {
 
 	int check = 0;
-	//ËùÓÃ³¤¶Èµ¥Î»¾ùÎªºÁÃ×£¬¿Ë£¬gÎª¹ú¼Êµ¥Î»
-	double T_a = 0;//aµÄÅ¤°ÚÖÜÆÚ
-	double T_a_O = 0;//aµÄÅ¤°ÚÖÜÆÚµÄ²»È·¶¨¶È
+	//æ‰€ç”¨é•¿åº¦å•ä½å‡ä¸ºæ¯«ç±³ï¼Œå…‹ï¼Œgä¸ºå›½é™…å•ä½
+	double T_a = 0;//açš„æ‰­æ‘†å‘¨æœŸ
+	double T_ab = 0;
+	double T_a_O = 0;//açš„æ‰­æ‘†å‘¨æœŸçš„ä¸ç¡®å®šåº¦
+	double T_ab_O = 0;
+
+	double m_a_O = 0;//açš„è´¨é‡çš„ç›¸å¯¹ä¸ç¡®å®šåº¦
+	double m_b_O = 0;
+	double m_a = 0;//açš„è´¨é‡
+	double m_b = 0;
+
+	double L = 0;//lçš„é•¿åº¦
+	double L_O = 0;//lçš„é•¿åº¦çš„ç›¸å¯¹ä¸ç¡®å®šåº¦
+
+	//æ‚¬è‡‚æ¢åŽšåº¦
+	double R_O = 0;//Rçš„å¤§å°çš„ç›¸å¯¹ä¸ç¡®å®šåº¦
+	double R = 0;//Rçš„å¤§å°
+	//è§’åº¦
+	double r = 0;//rçš„å¤§å°
+	double r_O = 0;//rçš„å¤§å°çš„ç›¸å¯¹ä¸ç¡®å®šåº¦
 	
-	double m_a_O = 0.;//aµÄÖÊÁ¿µÄÏà¶Ô²»È·¶¨¶È
-	double m_a = 0;//aµÄÖÊÁ¿
+	double E_ja=0;
+	double E_jab=0;
+	double sigma_ja=0;
+	double sigma_jab=0;
 
 
-	double L = 0;//lµÄ³¤¶È
-	double L_O = 0;//lµÄ³¤¶ÈµÄÏà¶Ô²»È·¶¨¶È
-
-	//Ðü±ÛÁººñ¶È
-	double R_O = 0;//RµÄ´óÐ¡µÄÏà¶Ô²»È·¶¨¶È
-	double R = 0;//RµÄ´óÐ¡
-	//½Ç¶È
-	double r = 0;//rµÄ´óÐ¡
-	double r_O = 0;//rµÄ´óÐ¡µÄÏà¶Ô²»È·¶¨¶È
-	printf("ÊÇ·ñ½øÐÐ¼ÆËã£¬ÊÇÔòÊäÈë1\n");
-	scanf("%d", &check);
-	while (check == 1) {
-		printf("ÇëÊäÈë\n");
-		scanf("%lf", &T_a);
-		printf("ÇëÊäÈëµÄ²»È·¶¨¶È\n");
-		scanf("%lf", &T_a_O);
-
-		printf("ÇëÊäÈëµÄ²»È·¶¨¶È\n");
-		scanf("%lf", &m_a_O);
-		printf("ÇëÊäÈë\n");
-		scanf("%lf", &m_a);
-
-		printf("ÇëÊäÈë\n");
-		scanf("%lf", &L);
-		printf("ÇëÊäÈëµÄÏà¶Ô²»È·¶¨¶È\n");
-		scanf("%lf", &L_O);
+	E_ja=calculate_unC(T_a,T_a_O,m_a,m_a_O,L,L_O,R,R_O,r,r_O);
+	E_jab=calculate_unC(T_ab,T_ab_O,m_a,m_a_O,m_b,m_b_O,L,L_O,R,R_O,r,r_O);
 
 
-		printf("ÇëÊäÈë\n");
-		scanf("%lf", &R);
-		printf("ÇëÊäÈëµÄÏà¶Ô²»È·¶¨¶È\n");
-		scanf("%lf", &R_O);
-
-		printf("ÇëÊäÈë\n");
-		scanf("%lf", &r);
-		printf("ÇëÊäÈëµÄÏà¶Ô²»È·¶¨¶È\n");
-		scanf("%lf", &r_O);
-
-		/*
-		printf("ÇëÊäÈë½Ç¶ÈµÄÏà¶Ô²»È·¶¨¶È* 10000\n");
-		scanf("%lf", &c_O_a_2a);
-	*/
-
-	//¼ÆËã¸÷¸öÆ½·½ºÍ(´øÏµÊý)
-		double c_T = T_a_O / T_a;
-		c_T = c_T * c_T * 4;
-
-		double c_m = m_a_O / m_a;
-		c_m = c_m * c_m;
-
-		double c_L = L_O / L;
-		c_L = c_L * c_L;
-
-		double c_R = (R_O) / R;
-		c_R = c_R * c_R;
-
-
-		double c_r = r_O / r;
-		c_r = c_r * c_r;
-
-
-		double c_sum = c_T + c_m + c_L + c_R + c_r;
-		printf("%.6f\n", c_sum);
-
-		//
-		printf("½á¹ûÎªÎ´¿ª¸ùºÅÇÒ·Å´óÁË100000000µÄÖµ");
-		printf("ÊÇ·ñ½øÐÐ¼ÆËã£¬ÊÇÔòÊäÈë1\n");
-		scanf("%d", &check);
-	}
 }
+
+
+double calculate_unC(double T,double T_O,double m,double m_O,double L,double L_O,double R,double R_O,double r,double r_O){
+
+	double c_T = T_O / T;
+	c_T = c_T * c_T * 4;
+
+	m=m*0.001;//g->kg
+	double c_m = m_O / m;
+	c_m = c_m * c_m;
+
+	L=L*0.01;//cm->m
+	double c_L = L_O / L;
+	c_L = c_L * c_L;
+
+	R=R*0.01;//cm->m
+	double c_R = (R_O) / R;
+	c_R = c_R * c_R;
+
+	r=r*0.01;//cm->m
+	double c_r = r_O / r;
+	c_r = c_r * c_r;
+
+
+	double c_sum = c_T + c_m + c_L + c_R + c_r;
+	c_sum=sqrt(c_sum);
+	return c_sum;
+}
+
+double calculate_unC_ab(double T,double T_O,double m_a,double m_a_O,double m_b,double m_b_O,double L,double L_O,double R,double R_O,double r,double r_O){
+	double c_T = T_O / T;
+	c_T = c_T * c_T * 4;
+
+	double m_O=m_a_O*m_a_O+m_b_O*m_b_O;
+	double m=m_a+m_b;
+	m=m*0.001;//g->kg
+	m=m*m;
+	double c_m = m_O / m;
+
+	L=L*0.01;//cm->m
+	double c_L = L_O / L;
+	c_L = c_L * c_L;
+
+	R=R*0.01;//cm->m
+	double c_R = (R_O) / R;
+	c_R = c_R * c_R;
+
+	r=r*0.01;//cm->m
+	double c_r = r_O / r;
+	c_r = c_r * c_r;
+
+
+	double c_sum = c_T + c_m + c_L + c_R + c_r;
+	c_sum=sqrt(c_sum);
+	return c_sum;
+}
+
+
+
+
