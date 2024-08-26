@@ -1,9 +1,9 @@
 //定义圆周率
-const PI = Math.acos(-1);
+//const PI = Math.acos(-1);
 
 //计算转动惯量
 function rotational_inertia_calculate(R_I_m, R_I_R, R_I_r, R_I_T, R_I_L) {
-    const g = 0; //重力加速度
+    const g = 10; //重力加速度
     let res = 0;
     res=math.bignumber(res);
 
@@ -31,7 +31,7 @@ function rotationalAo_inertia_in_theory_calculate(R_T_M, R_T_R) {
     //单位转化
 
     R_T_M =math.chain(R_T_M).multiply(0.001).done();
-    R_T_R = math.chain(R_I_R).multiply(0.01).done();
+    R_T_R = math.chain(R_T_R).multiply(0.01).done();
 
     //R_T_M = R_T_M * 0.001;
     //R_T_R = R_T_R * 0.01;
@@ -70,7 +70,7 @@ function rotationalBo_inertia_in_theory_calculate(R_T_M,R_T_Rb,R_T_rb){
 }
 //主函数
 function __main__rotational_inertia_calculate(m_a,m_b,T_a,T_ab,Ra,Rb,R,r,rb,L) {
-    const g = 0; //重力加速度（单位）
+    let g = 0; //重力加速度（单位）
     g=math.bignumber(g);
     m_a = math.bignumber(m_a); //圆盘a的质量（g）
     m_b =math.bignumber(m_b); //圆盘b的质量（g）
