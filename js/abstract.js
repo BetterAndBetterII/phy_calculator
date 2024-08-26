@@ -328,6 +328,17 @@ function add_event_listener_to_remove_button(table_id, remove_button) {
 
 function add_event_listener_to_add_point(table_id, add_button, x_detail, y_detail) {
     add_button.addEventListener('click', function() {
+        //点击按钮增加高度
+        const Button=document.getElementsByClassName('col-md-9 col-lg-10 main-content');
+        if (Button.length){ 
+            const currentHeight = window.getComputedStyle(Button[0]).height;  
+            const newHeight = parseFloat(currentHeight) + 50;  
+            Button[0].style.height = newHeight + 'px';   
+        }
+
+        //
+
+        
         const table = document.getElementById(table_id).getElementsByTagName('tbody')[0];
         const newRow = table.insertRow(table.rows.length);
         const cell1 = newRow.insertCell(0);
@@ -339,6 +350,20 @@ function add_event_listener_to_add_point(table_id, add_button, x_detail, y_detai
         cell3.innerHTML = `<input type="number" class="form-control" placeholder="${y_detail}">`;
         cell4.innerHTML = '<button type="button" class="btn btn-danger remove-point">删除</button>';
         cell4.children[0].addEventListener('click', function() {
+            //
+            const Button=document.getElementsByClassName('col-md-9 col-lg-10 main-content');
+            if (Button.length){
+                // const newHeight = window.innerHeight  + 90; // 计算新的高度，增加50  
+                // Button[0].style.height = newHeight + 'px'; // 设置更新后的高度  
+                const currentHeight = window.getComputedStyle(Button[0]).height;  
+            
+            // 将当前高度值转换为数字并增加50px  
+            const newHeight = parseFloat(currentHeight) - 50;  
+            Button[0].style.height = newHeight + 'px'; // 更新元素高度  
+            }
+
+
+            
             this.closest('tr').remove();
             updateRowNumbers(table_id);
         });
