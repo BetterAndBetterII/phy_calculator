@@ -392,6 +392,35 @@ window.onload = function () {
         };
         side_bar.appendChild(a_tag);
     }
+    //
+    //生成之后对特定按键检测，改变大小
+    var check=false;
+    const Href=document.getElementById('rotationInertia');
+    Href.addEventListener('click',function(){
+        const ButtoN=document.getElementsByClassName('col-md-9 col-lg-10 main-content');
+        ButtoN[0].style.height='1200px';
+        check=true;
+
+    });
+    //检测点击侧边栏时把页面的大小样式重置
+    const sideBarBox = document.getElementById('sidebar');
+    sideBarBox.addEventListener('click',function(){
+        if(check==false){
+            const main_content=document.getElementsByClassName('col-md-9 col-lg-10 main-content');
+            //const currentHeight = window.getComputedStyle(Button[0]).height;
+            main_content[0].style.height=759.333+'px';
+        }
+        check=false;
+        
+    })
+    
+
+    /////
+
+
+
+
+    
 
     // generate form inputs
     for (let cal_key in calculations) {
