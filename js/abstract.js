@@ -206,6 +206,71 @@ const calculations = {
         }
 
     },
+     "rotationInertia":{
+            "name":"计算转动惯量",
+            'description':"请按照说明在下方输入数据。",
+            "inputs":{
+                //m_a,m_b,T_a,T_ab,Ra,Rb,R,r,rb,L
+                "m_a":{
+                    "name":"a的质量",
+                    "details":"输入a的质量(g)...",
+                    "type": "number"
+                },
+                "m_b":{
+                    "name":"b的质量",
+                    "details":"输入b的质量(g)...",
+                    "type": "number"
+                },
+                "T_a":{
+                    "name":"a的周期",
+                    "details":"输入a的周期(s)...",
+                    "type": "number"
+                },
+                "T_ab":{
+                    "name":"ab的周期",
+                    "details":"输入ab的周期(s)...",
+                    "type": "number"
+                },
+                "Ra":{
+                    "name":"a的半径",
+                    "details":"输入a的半径(cm)...",
+                    "type": "number"
+                },
+                "Rb":{
+                    "name":"b的半径",
+                    "details":"输入b的半径(cm)...",
+                    "type": "number"
+                },
+                "R":{
+                    "name":"ab的半径",
+                    "details":"输入ab的半径(cm)...",
+                    "type": "number"
+                },
+                "r":{
+                    "name":"r的半径",
+                    "details":"输入r的半径(cm)...",
+                    "type": "number"
+                },
+                "rb":{
+                    "name":"rb的半径",
+                    "details":"输入rb的半径(cm)...",
+                    "type": "number"
+                },
+                "L":{
+                    "name":"L",
+                    "details":"输入L(cm)...",
+                    "type": "number"
+                }
+
+            },
+            "calculation":{
+                "function":"__main__rotational_inertia_calculate",
+                "arguments":['m_a','m_b','T_a','T_ab','Ra','Rb','R','r','rb','L']
+            },
+            "outputs":{
+                "result":"$$A的转动惯量是{J_a}$$ $$AB的转动惯量是{J_ab}$$ $$A的理论转动惯量是{Th_J_Ao}$$ $$AB的理论转动惯量是{Th_J_Bo}$$"
+            }
+        },
 }
 
 
