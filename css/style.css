@@ -171,4 +171,46 @@ svg:not(:root) {
 body {
     overflow: auto;
   }
-
+/*显示md弹窗的样式 */
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 1000px;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+/* 遮罩层: 添加遮罩层以保持弹窗背景的模糊，这样用户可以看到弹窗以外的内容。 */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+/* 显示md的按钮样式*/
+#showPopup {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+/*关闭md的按钮样式  */
+#closePopup{
+    color:#ff0000
+}
