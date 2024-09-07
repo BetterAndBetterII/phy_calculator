@@ -392,14 +392,45 @@ function add_event_listener_to_remove_button(table_id, remove_button) {
 }
 
 function add_event_listener_to_add_point(table_id, add_button, x_detail, y_detail) {
+    //用于更新高度的函数
+     function updateHigh(){
+        var LenOfTd=target_tbody.children.length;
+        if (LenOfTd>5){
+            //更新输入框的高度
+            const input_OrigHigh=759.333; 
+            const input_frame=document.getElementsByClassName('col-md-9 col-lg-10 main-content');  
+            var new_input_height = input_OrigHigh + 55*(LenOfTd-5);  
+            input_frame[0].style.height = new_input_height + 'px';   
+            //更新输出框的高度
+            const output_OrigHigh=56;
+            const output_frame=document.getElementById('result');
+            var new_output_high=output_OrigHigh+24*(LenOfTd-5);
+            output_frame.style.height=new_output_high+'px';
+            //更新侧边栏的高度
+            const side_Bar=document.getElementById('sidebar');
+            side_Bar.style.height=input_frame[0].style.height;
+        }
+
+     }
+    const target_tbody = document.getElementsByTagName('tbody')[0];
+    //创建一个MutationObserver实例  
+    const add_point_observer = new MutationObserver(updateHigh);  
+
+    // 配置观察选项  
+    const add_point_config = { childList: true, subtree: false };  
+
+    // 开始观察目标元素  
+    add_point_observer.observe(target_tbody, add_point_config); 
+
+
     add_button.addEventListener('click', function() {
         //点击按钮增加高度
-        const Button=document.getElementsByClassName('col-md-9 col-lg-10 main-content');
-        if (Button.length){ 
-            const currentHeight = window.getComputedStyle(Button[0]).height;  
-            const newHeight = parseFloat(currentHeight) + 50;  
-            Button[0].style.height = newHeight + 'px';   
-        }
+        // const Button=document.getElementsByClassName('col-md-9 col-lg-10 main-content');
+        // if (Button.length){ 
+        //     const currentHeight = window.getComputedStyle(Button[0]).height;  
+        //     const newHeight = parseFloat(currentHeight) + 50;  
+        //     Button[0].style.height = newHeight + 'px';   
+        // }
 
         //
 
@@ -416,16 +447,16 @@ function add_event_listener_to_add_point(table_id, add_button, x_detail, y_detai
         cell4.innerHTML = '<button type="button" class="btn btn-danger remove-point">删除</button>';
         cell4.children[0].addEventListener('click', function() {
             //
-            const Button=document.getElementsByClassName('col-md-9 col-lg-10 main-content');
-            if (Button.length){
-                // const newHeight = window.innerHeight  + 90; // 计算新的高度，增加50  
-                // Button[0].style.height = newHeight + 'px'; // 设置更新后的高度  
-                const currentHeight = window.getComputedStyle(Button[0]).height;  
+            // const Button=document.getElementsByClassName('col-md-9 col-lg-10 main-content');
+            // if (Button.length){
+            //     // const newHeight = window.innerHeight  + 90; // 计算新的高度，增加50  
+            //     // Button[0].style.height = newHeight + 'px'; // 设置更新后的高度  
+            //     const currentHeight = window.getComputedStyle(Button[0]).height;  
             
-            // 将当前高度值转换为数字并增加50px  
-            const newHeight = parseFloat(currentHeight) - 50;  
-            Button[0].style.height = newHeight + 'px'; // 更新元素高度  
-            }
+            // // 将当前高度值转换为数字并增加50px  
+            // const newHeight = parseFloat(currentHeight) - 50;  
+            // Button[0].style.height = newHeight + 'px'; // 更新元素高度  
+            // }
 
 
             
